@@ -228,6 +228,8 @@ class BinLogStreamReader(object):
             self._stream_connection._write_bytes(prelude)
         self.__connected_stream = True
 
+    # 从返回的 packet 包中解析每次返回一个 event
+    # 为什么用 return 返回而不用 yeild 呢？
     def fetchone(self):
         while True:
             if not self.__connected_stream:
